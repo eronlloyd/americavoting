@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 with open("americavoting/secrets.json") as f:
     secrets = json.loads(f.read())
 
+
 def get_secret(setting, secrets=secrets):
     """Get the secret variable or return explicit exception."""
 
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core.apps.AmericaVotingConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

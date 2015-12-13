@@ -60,3 +60,6 @@ target/
 
 # IDE
 .idea
+
+# voting data
+/data/voters/
