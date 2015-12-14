@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Divisions</h1>
+<table>
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Division Name</td>
+            <td>Category</td>
+            <td>Capital City</td>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for division in divisions %}
+        <tr>
+            <td>{{ forloop.counter }}.</td>
+            <td><a href="{% url 'division_detail' division.slug %}">{{ division.name }}</a></td>
+            <td>{{ division.category }}</td>
+            <td>{{ division.capital_city }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
