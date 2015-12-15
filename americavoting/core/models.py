@@ -54,7 +54,7 @@ class Division(models.Model):
         ('under review', 'Under Review'),
     )
     data_status = models.CharField(max_length=25, null=False, blank=False,
-                                   default='unavailable')
+                                   default='unavailable', choices=DATA_STATUS)
     is_published = models.BooleanField(default=False)
     last_updated = models.DateTimeField(default=datetime.now(), null=False,
                                         blank=False)
