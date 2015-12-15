@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
@@ -35,7 +36,7 @@ class Division(models.Model):
         ('annually', 'Annually'),
         ('unknown', 'Unknown'),
     )
-    data_refresh = models.CharField(max_length=15, default='Unknown',
+    data_refresh = models.CharField(max_length=15, default='unknown',
                                     null=False, blank=False,
                                     choices=DATA_REFRESH)
     data_cost = models.IntegerField(default=0, null=False, blank=False)
@@ -46,9 +47,22 @@ class Division(models.Model):
     notes = models.TextField(blank=True)
     slug = models.SlugField(max_length=105, null=False, blank=False,
                             unique=True)
+    DATA_STATUS = (
+        ('in progress', 'In Progress'),
+        ('published', 'Published'),
+        ('unavailable', 'Unavailable'),
+        ('under review', 'Under Review'),
+    )
+    data_status = models.CharField(max_length=25, null=False, blank=False,
+                                   default='unavailable')
     is_published = models.BooleanField(default=False)
     last_updated = models.DateTimeField(default=datetime.now(), null=False,
                                         blank=False)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super(Division, self).save(*args, **kwargs)
