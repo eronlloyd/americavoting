@@ -1,4 +1,4 @@
-# americavoting
+# Voting in America
 
 Voting in America is a personal data analytics project of mine to contruct a national picture of voter participation in the U.S. My premise is that it is dropping to crisis levels in many places, and I'd like to identify patterns of participation, at the voter record level, which to my knowledge has not happened yet.
 
