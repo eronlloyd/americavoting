@@ -2,7 +2,11 @@ from datetime import datetime
 
 from django.db import models
 from django.utils.text import slugify
-from django.contrib.auth.models import User
+
+
+class DataSet(models.Model):
+    name = models.CharField(max_length=50)
+    data_file = models.FileField(upload_to='data')
 
 
 class Division(models.Model):
@@ -56,6 +60,7 @@ class Division(models.Model):
     data_status = models.CharField(max_length=25, null=False, blank=False,
                                    default='unavailable', choices=DATA_STATUS)
     is_published = models.BooleanField(default=False)
+    # TODO: Should this be last edited, as it's only the model, not the data?
     last_updated = models.DateTimeField(default=datetime.now(), null=False,
                                         blank=False)
 
@@ -65,4 +70,13 @@ class Division(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+        self.last_updated = datetime.now()  # Is the above redundant?
         super(Division, self).save(*args, **kwargs)
+
+
+class PoliticalParty(models.Model):
+    name = models.CharField(max_length=100)
+    abbreviation = models.CharField(max_length=5)
+
+    class Meta:
+        verbose_name_plural = 'political parties'

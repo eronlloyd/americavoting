@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.db.utils import IntegrityError
 
-from .models import Division
+from .models import Division, PoliticalParty
 
 
 class DivisionTestCase(TestCase):
@@ -26,3 +26,9 @@ class DivisionTestCase(TestCase):
         """It shouldn't be possible to create duplicates of existing divisions."""
         self.assertRaisesMessage(IntegrityError, Division.objects.create,
                                  name="Pennsylvania")
+
+
+class PoliticalPartyTestCase(TestCase):
+    def setUp(self):
+        PoliticalParty.objects.create(name='Democratic', abbreviation='D')
+
