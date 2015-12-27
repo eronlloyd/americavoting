@@ -140,5 +140,5 @@ STATIC_URL = '/static/'
 
 # Media files
 
-MEDIA_ROOT = get_secret('MEDIA_ROOT')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = get_secret('MEDIA_ROOT')

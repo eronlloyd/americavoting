@@ -2,11 +2,7 @@ from datetime import datetime
 
 from django.db import models
 from django.utils.text import slugify
-
-
-class DataSet(models.Model):
-    name = models.CharField(max_length=50)
-    data_file = models.FileField(upload_to='data')
+from django.utils.timezone import now
 
 
 class Division(models.Model):
@@ -61,7 +57,7 @@ class Division(models.Model):
                                    default='unavailable', choices=DATA_STATUS)
     is_published = models.BooleanField(default=False)
     # TODO: Should this be last edited, as it's only the model, not the data?
-    last_updated = models.DateTimeField(default=datetime.now(), null=False,
+    last_updated = models.DateTimeField(default=now, null=False,
                                         blank=False)
 
     def __str__(self):
@@ -80,3 +76,16 @@ class PoliticalParty(models.Model):
 
     class Meta:
         verbose_name_plural = 'political parties'
+
+
+def data_set_location(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/data/<division>/<filename>
+    return 'data/{0}/{1}-{2}'.format(instance.division.name.lower(),
+                                 instance.upload_date, filename)
+
+
+class DataSet(models.Model):
+    name = models.CharField(max_length=50)
+    data_file = models.FileField(upload_to=data_set_location)
+    division = models.ForeignKey(Division)
+    upload_date = models.DateField(default=now, null=False, blank=False)
