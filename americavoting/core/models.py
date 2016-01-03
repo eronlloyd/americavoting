@@ -85,7 +85,13 @@ def data_set_location(instance, filename):
 
 
 class DataSet(models.Model):
+
+    # TODO: Delete file when deleting DataSet instance
+
     name = models.CharField(max_length=50)
     data_file = models.FileField(upload_to=data_set_location)
     division = models.ForeignKey(Division)
     upload_date = models.DateField(default=now, null=False, blank=False)
+
+    def __str__(self):
+        return self.name

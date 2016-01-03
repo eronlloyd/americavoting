@@ -5,7 +5,7 @@ from .models import DataSet, Division, PoliticalParty
 
 @admin.register(DataSet)
 class DataSetAdmin(admin.ModelAdmin):
-    list_display = ['name', 'division', 'data_file']
+    list_display = ['name', 'division', 'upload_date', 'data_file']
 
 
 @admin.register(Division)
