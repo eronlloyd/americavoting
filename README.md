@@ -12,7 +12,7 @@ not, become better informed about the issue, and start more
 conversations around related reforms.
 
 For each state I can get data (and it seems that not all will be
-available), I will do an analysis of the raw data in an IPython notebook
+available), I will do an analysis of the raw data in a Jupyter notebook
 and then normalize the data into a standard and "tidy" format that will
 be loaded into the database for further analysis and visualization.
 
