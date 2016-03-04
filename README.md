@@ -19,7 +19,7 @@ be loaded into the database for further analysis and visualization.
 Visitors to the site will then be able to view detailed reporting in
 each state of things like voter participation, political party levels,
 voter sex and age levels (when available). At this point, we will not
-publish indiviudal voter records to protect privacy. The reports can be
+publish individual voter records to protect privacy. The reports can be
 filtered at the county, municipality, and district levels.
 
 Once enough data is in the system, I will begin more advanced analysis
