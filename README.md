@@ -35,6 +35,8 @@ then compare that to the annual actuals that come in each year moving
 forward. Eventually, with the inclusion of more demographic data, we
 might have a useful model.[*]
 
+Detailed information on this project can be found in the Wiki.
+
 [*] I know there are proprietary models developed by campaign companies
 that do this to a large extent, but they focus mainly on individual
 voter interests for pursuation purposes, while this would use public
