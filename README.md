@@ -31,9 +31,9 @@ registration, and voter age changes to see how they may impact data.
 Finally, I'll begin experimenting with predictive analytics on voting
 patterns, using the historical records to develop some basic algorithms
 that guess whether a voter in a specific area is likely to vote in upcoming
-elections, and then compare that to the annual actuals that come in each year moving
-forward. Eventually, with the inclusion of more demographic data, we
-might have a useful model.[*]
+elections, and then compare that to the annual actuals that come in each
+year moving forward. Eventually, with the inclusion of more demographic
+data, we might have a useful model.[*]
 
 Detailed information on this project can be found in the [Wiki]
 (https://github.com/eronlloyd/americavoting/wiki).
