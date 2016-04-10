@@ -78,6 +78,10 @@ class PoliticalParty(models.Model):
         verbose_name_plural = 'political parties'
 
 
+class Voter(models.Model):
+    pass
+
+
 def data_set_location(instance, filename):
     # file will be uploaded to MEDIA_ROOT/data/<division>/<filename>
     return 'data/{0}/{1}-{2}'.format(instance.division.name.lower(),
