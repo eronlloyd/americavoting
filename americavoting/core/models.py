@@ -79,7 +79,96 @@ class PoliticalParty(models.Model):
 
 
 class Voter(models.Model):
-    pass
+    # This will be the base voter class. I still need to decide how to handle
+    # fields I don't want to standardize on, yet, however. TODO
+
+    official_id = models.IntegerField()
+    slug = 'voter-registration'
+
+    districts = models.ManyToManyField(GeoDistrict, null=True, blank=True)
+    identifier = models.CharField(max_length=100, blank=True)
+    political_party = models.ForeignKey(PoliticalParty, null=True, blank=True)
+    first_name = models.CharField(max_length=30)
+    middle_name = models.CharField(max_length=30, blank=True)
+    # last_name_prefix = models.CharField(max_length=30, default="",
+    # blank=True)
+    last_name = models.CharField(max_length=30)
+    former_name = models.CharField(max_length=30, blank=True)
+    alias = models.CharField(max_length=30, blank=True)
+    GENERATION_IDENTIFIER = (
+        (u'Jr.', u'Jr.'),
+        (u'Sr.', u'Sr.'),
+        (u'I', u'I'),
+        (u'II', u'II'),
+        (u'III', u'III'),
+    )
+    generation_identifier = models.CharField(max_length=10,
+                                             choices=GENERATION_IDENTIFIER,
+                                             blank=True)
+    # suffix = models.CharField(max_length=30, blank=True)
+    # general_suffix = models.CharField(max_length=30, blank=True)
+    # TODO: Now that we have the 50+ Facebook options...
+    GENDER = (
+        (u'Unknown', u'Unknown'),
+        (u'Female', u'Female'),
+        (u'Male', u'Male'),
+    )
+    gender = models.CharField(max_length=8, choices=GENDER,
+                              default="Unknown", blank=True)
+    RACE = (
+        ('White', 'White'),
+        ('Black', 'Black'),
+        ('Latino', 'Latino'),
+        ('Asian/Pacific Islander', 'Asian/Pacific Islander'),
+        ('Native American', 'Native American'),
+        ('Mixed/Other', 'Mixed/Other'),
+    )
+    race = models.CharField(max_length=30, blank=True, choices=RACE)
+    # nationality = models.CharField(max_length=30, blank=True)
+    # birth_place = models.CharField(max_length=30, blank=True)
+    # This can be required later, depending on the person's roles and rules.
+    birth_date = models.DateField(null=True, blank=True)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=14, blank=True)
+    street_address = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    state = models.CharField(max_length=100, blank=True)
+    zip_code = models.CharField(max_length=9, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    latitude = models.CharField(max_length=15, blank=True)
+    longitude = models.CharField(max_length=15, blank=True)
+    registration_date = models.DateField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_flagged = models.BooleanField(default=False)
+
+    class Meta:
+        pass
+
+    def age(self):
+        """Returns person's age in years."""
+        # TODO: check for a better algorithm
+        today = datetime.date.today()
+        # raised when birth date is February 29 and the current year is not a
+        # leap year
+        try:
+            birthday = self.birth_date.replace(year=today.year)
+        except ValueError:
+            birthday = self.birth_date.replace(year=today.year,
+                                               day=self.birth_date.day - 1)
+        if birthday > today:
+            return today.year - self.birth_date.year - 1
+        else:
+            return today.year - self.birth_date.year
+
+    def full_name(self):
+        if self.middle_name:
+            return "%s %s. %s" % (self.first_name, self.middle_name[0],
+                                  self.last_name)
+        else:
+            return "%s %s" % (self.first_name, self.last_name)
+
+    def __str__(self):
+        return self.full_name()
 
 
 def data_set_location(instance, filename):
