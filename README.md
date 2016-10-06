@@ -41,4 +41,4 @@ Detailed information on this project can be found in the [Wiki]
 [*] I know there are proprietary models developed by campaign companies
 that do this to a large extent, but they focus mainly on individual
 voter interests for pursuation purposes, while this would use public
-policy factors for reform purposes.
+policy factors for research and reform purposes.
